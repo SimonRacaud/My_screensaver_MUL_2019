@@ -5,7 +5,7 @@
 ** framebuffer
 */
 
-#include "my_sreensaver.h"
+#include "my_screensaver.h"
 
 framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
 {
@@ -15,11 +15,15 @@ framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
         return (NULL);
     buffer->width = width;
     buffer->height = height;
-    buffer->pixels = malloc((width * height * 32) / 8);
+    buffer->pixels = malloc(sizeof(sfUint8) * (width * height * 4));
     if (buffer->pixels == NULL)
         return (NULL);
+    for (unsigned int i = 0; i <= (width * height * 4); i++)
+        buffer->pixels[i] = 0;
     buffer->texture = sfTexture_create(buffer->width, buffer->height);
     buffer->sprite = sfSprite_create();
+    if (buffer->texture == NULL || buffer->sprite == NULL)
+        return NULL;
     return (buffer);
 }
 

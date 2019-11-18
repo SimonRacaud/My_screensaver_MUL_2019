@@ -41,7 +41,8 @@ sfColor *color);
 int draw_line(framebuffer_t *fb, sfVector2i *point_a, sfVector2i *point_b,
 sfColor *c);
 int draw_circle(framebuffer_t *fb, circle_t *c);
-int draw_circle2(framebuffer_t *framebuffer, sfVector2i *center, int radius);
+int draw_circle2(framebuffer_t *framebuffer, sfVector2i *center, int radius,
+sfColor *c);
 
 double perlin(double x, double y, int res, unsigned int *perm);
 void mix_permutation_table(unsigned int *permutation_table);

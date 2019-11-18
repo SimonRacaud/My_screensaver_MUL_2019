@@ -18,8 +18,8 @@
 required\nretry with -h\n\033[0m"
 
 static const int FRAMERATE = 60;
-static const int W_WIDTH = 800;
-static const int W_HEIGHT = 600;
+static const int W_WIDTH = 1920;
+static const int W_HEIGHT = 1080;
 
 static const int FB_WIDTH = 1920;
 static const int FB_HEIGHT = 1080;
@@ -29,16 +29,21 @@ typedef struct window {
     framebuffer_t *fb;
     framebuffer_t *fb2;
     framebuffer_t *fb3;
+    framebuffer_t *fb4;
+    int nb_fb;
 } window_t;
 
 void usage(void);
 void description(void);
 int check_get_id(char *str);
 
-window_t *create_window(void);
+window_t *create_window(int nb_fb);
 void create_el_window(window_t *w);
 void destroy_window(window_t *w);
 
+void event_manager(window_t *w, sfEvent *e);
 int run(int id);
+
+int run01(void);
 
 #endif

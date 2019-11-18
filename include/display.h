@@ -10,7 +10,16 @@
 
 #define MAX_ID 8
 
-static const char *DESCRIPTION[MAX_ID] = {"Animation 1", "A2", "A3", "A4", "A5",
-"A6", "A7", "A8"};
+static const char *DESCRIPTION[MAX_ID] =
+{
+    "A random 2D map generator.",
+    "A2",
+    "A3",
+    "A4",
+    "A5",
+    "A6",
+    "A7",
+    "A8"
+};
 
 #endif

@@ -6,7 +6,7 @@
 */
 
 #include "my.h"
-#include "my_sreensaver.h"
+#include "my_screensaver.h"
 #include "display.h"
 
 void usage(void)
