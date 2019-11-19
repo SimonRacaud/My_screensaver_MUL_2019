@@ -49,8 +49,8 @@ static void water_effect(framebuffer_t *fb, water_t *water)
         coord.y = p / (fb->width * 4);
         coord.x = p - (coord.y * fb->width * 4);
         pix_shift = (p / 4) + water->shift;
-        if (coord.x >= fb->width - water->shift)
-            pix_shift = coord.y * fb->width + (fb->width - water->shift);
+        //if (coord.x >= fb->width - water->shift)
+        //    pix_shift = coord.y * fb->width + (fb->width - water->shift);
         fb->pixels[p] = (water->p01[p / 4] + water->p02[pix_shift]) / 2;
         fb->pixels[p + 1] = (water->p01[p / 4] + water->p02[pix_shift]) / 2;
         fb->pixels[p + 2] = (water->p01[p / 4] + water->p02[pix_shift]) / 2;
