@@ -12,6 +12,9 @@
 #include <math.h>
 #include <stdlib.h>
 
+#define ABS(x) (x < 0) ? -x : x
+#define DELTA(x, y) (x >= y) ? x - y : y - x
+
 typedef struct framebuffer {
     sfUint8 *pixels;
     unsigned int width;
@@ -31,6 +34,7 @@ framebuffer_t *framebuffer_create(unsigned int width, unsigned int height);
 void framebuffer_destroy(framebuffer_t *buffer);
 void display_framebuffer(framebuffer_t *fb, sfRenderWindow *w);
 void framebuffer_perlin_noise(framebuffer_t *fb);
+void framebuffer_clear(framebuffer_t *fb);
 
 int put_pixel(framebuffer_t *framebuffer, unsigned int x, unsigned int y,
 sfColor *color);
@@ -47,4 +51,5 @@ sfColor *c);
 double perlin(double x, double y, int res, unsigned int *perm);
 void mix_permutation_table(unsigned int *permutation_table);
 
+void blur(framebuffer_t *fb, unsigned int coef);
 #endif

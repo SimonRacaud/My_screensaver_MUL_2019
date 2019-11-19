@@ -32,14 +32,20 @@ int main(int ac, char **av)
 
 void event_manager(window_t *w, sfEvent *e)
 {
-    if (e->type == sfEvtClosed)
+    if (e->type == sfEvtClosed) {
         sfRenderWindow_close(w->window);
-    else if (e->type == sfEvtKeyPressed) {
+    } else if (e->type == sfEvtKeyPressed) {
         if (e->key.code == sfKeyLeft) {
             sfRenderWindow_close(w->window);
         } else if (e->key.code == sfKeyRight) {
             sfRenderWindow_close(w->window);
         }
+    }
+    if (e->type == sfEvtResized) {
+        w->height = e->size.height;
+        w->width = e->size.width;
+        destroy_framebuffer(w);
+        create_framebuffer(w);
     }
 }
 
@@ -51,5 +57,7 @@ int run(int id)
         run01();
     else if (id == 2)
         run02();
+    else if (id == 3)
+        run03();
     return 0;
 }

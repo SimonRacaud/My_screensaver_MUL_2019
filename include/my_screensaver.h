@@ -21,9 +21,6 @@ static const int FRAMERATE = 60;
 static const int W_WIDTH = 1920;
 static const int W_HEIGHT = 1080;
 
-static const int FB_WIDTH = 1920;
-static const int FB_HEIGHT = 1080;
-
 typedef struct window {
     sfRenderWindow *window;
     framebuffer_t *fb;
@@ -31,6 +28,8 @@ typedef struct window {
     framebuffer_t *fb3;
     framebuffer_t *fb4;
     int nb_fb;
+    unsigned int height;
+    unsigned int width;
 } window_t;
 
 void usage(void);
@@ -38,12 +37,15 @@ void description(void);
 int check_get_id(char *str);
 
 window_t *create_window(int nb_fb);
-void create_el_window(window_t *w);
+int create_framebuffer(window_t *w);
 void destroy_window(window_t *w);
+void destroy_framebuffer(window_t *w);
 
 void event_manager(window_t *w, sfEvent *e);
 int run(int id);
 
 int run01(void);
+int run02(void);
+int run03(void);
 
 #endif

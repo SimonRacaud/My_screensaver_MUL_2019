@@ -14,7 +14,9 @@ SRC	=	main.c			\
 		perlin_noise.c		\
 		framebuffer_blur.c	\
 		w01_ground_generator.c	\
-		w01_ground_generator_ext.c
+		w01_ground_generator_ext.c	\
+		w02_water.c			\
+		w03_pipe.c
 
 OBJ	=	$(SRC:.c=.o)
 
