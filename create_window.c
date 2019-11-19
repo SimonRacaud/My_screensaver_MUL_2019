@@ -26,6 +26,7 @@ window_t *create_window(int nb_fb)
 int create_framebuffer(window_t *w)
 {
     framebuffer_t **fba[4] = {&w->fb, &w->fb2, &w->fb3, &w->fb4};
+
     for (int i = 0; i < w->nb_fb; i++) {
         *fba[i] = framebuffer_create(w->width, w->height);
         if (*fba[i] == NULL)
@@ -38,12 +39,15 @@ void destroy_window(window_t *w)
 {
     sfRenderWindow_destroy(w->window);
     destroy_framebuffer(w);
+    free(w);
 }
 
 void destroy_framebuffer(window_t *w)
 {
-    if (w->nb_fb >= 1)
+    if (w->nb_fb >= 1) {
         framebuffer_destroy(w->fb);
+        w->fb = NULL;
+    }
     if (w->nb_fb >= 2)
         framebuffer_destroy(w->fb2);
     if (w->nb_fb >= 3)

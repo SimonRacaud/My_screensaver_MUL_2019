@@ -54,9 +54,9 @@ int run01(void)
     if (!w)
         return 1;
     while (sfRenderWindow_isOpen(w->window)) {
+        display(&map, w, timer);
         while (sfRenderWindow_pollEvent(w->window, &event))
             event_manager(w, &event);
-        display(&map, w, timer);
     }
     destroy_window(w);
     sfClock_destroy(timer);

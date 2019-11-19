@@ -11,7 +11,6 @@ framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
 {
     framebuffer_t *buffer = malloc(sizeof(framebuffer_t));
 
-    printf("@@@ %u %u\n", height, width);
     if (buffer == NULL)
         return (NULL);
     buffer->width = width;
@@ -30,11 +29,12 @@ framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
 
 void framebuffer_destroy(framebuffer_t *buffer)
 {
+    if (buffer == NULL)
+        return;
     free(buffer->pixels);
     sfSprite_destroy(buffer->sprite);
     sfTexture_destroy(buffer->texture);
     free(buffer);
-    buffer = NULL;
 }
 
 void display_framebuffer(framebuffer_t *fb, sfRenderWindow *w)

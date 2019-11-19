@@ -8,6 +8,13 @@
 #include "my.h"
 #include "my_screensaver.h"
 
+const int (*animations[MAX_ID])(void) =
+{
+    &run01,
+    &run02,
+    &run03
+};
+
 int main(int ac, char **av)
 {
     int id = 0;
@@ -22,8 +29,9 @@ int main(int ac, char **av)
         description();
     } else {
         id = check_get_id(av[1]);
-        if (id == -1)
-            return 84;
+        if (id < 1 || id >= MAX_ID) {
+            usage();
+        }
         if (!run(id))
             return 84;
     }
@@ -42,22 +50,20 @@ void event_manager(window_t *w, sfEvent *e)
         }
     }
     if (e->type == sfEvtResized) {
-        w->height = e->size.height;
-        w->width = e->size.width;
-        destroy_framebuffer(w);
-        create_framebuffer(w);
+        if (w->height != e->size.height || w->width != e->size.width) {
+            w->height = e->size.height;
+            w->width = e->size.width;
+        }
     }
 }
 
 int run(int id)
 {
-    srand(time(NULL));
+    int ret = 0;
 
-    if (id == 1)
-        run01();
-    else if (id == 2)
-        run02();
-    else if (id == 3)
-        run03();
+    srand(time(NULL));
+    ret = animations[id - 1]();
+    if (ret == 1)
+        run(id);
     return 0;
 }

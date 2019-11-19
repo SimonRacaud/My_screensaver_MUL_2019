@@ -8,8 +8,6 @@
 #ifndef H_DISP
 #define H_DISP
 
-#define MAX_ID 8
-
 static const char *DESCRIPTION[MAX_ID] =
 {
     "A random 2D map generator.",
