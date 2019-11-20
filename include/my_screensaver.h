@@ -23,6 +23,7 @@ static const int W_WIDTH = 1920;
 static const int W_HEIGHT = 1080;
 
 typedef struct window {
+    sfClock *timer;
     sfRenderWindow *window;
     framebuffer_t *fb;
     framebuffer_t *fb2;
@@ -42,11 +43,12 @@ int create_framebuffer(window_t *w);
 void destroy_window(window_t *w);
 void destroy_framebuffer(window_t *w);
 
-void event_manager(window_t *w, sfEvent *e);
+int event_manager(window_t *w, sfEvent *e);
 int run(int id);
 
 int run01(void);
 int run02(void);
 int run03(void);
+int run04(void);
 
 #endif

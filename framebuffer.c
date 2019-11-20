@@ -51,7 +51,7 @@ sfColor *color)
 {
     int indexpix = (y * (framebuffer->width * 4)) + ((x + 1) * 4);
 
-    if (x <= framebuffer->width && y <= framebuffer->height) {
+    if (x < framebuffer->width && y < framebuffer->height) {
         framebuffer->pixels[0 + indexpix] = color->r;
         framebuffer->pixels[1 + indexpix] = color->g;
         framebuffer->pixels[2 + indexpix] = color->b;

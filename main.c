@@ -12,7 +12,8 @@ const int (*animations[MAX_ID])(void) =
 {
     &run01,
     &run02,
-    &run03
+    &run03,
+    &run04
 };
 
 int main(int ac, char **av)
@@ -38,23 +39,26 @@ int main(int ac, char **av)
     return 0;
 }
 
-void event_manager(window_t *w, sfEvent *e)
+int event_manager(window_t *w, sfEvent *e)
 {
     if (e->type == sfEvtClosed) {
+        printf("A\n");
         sfRenderWindow_close(w->window);
+        printf("B\n");
     } else if (e->type == sfEvtKeyPressed) {
         if (e->key.code == sfKeyLeft) {
-            sfRenderWindow_close(w->window);
+
         } else if (e->key.code == sfKeyRight) {
-            sfRenderWindow_close(w->window);
+
         }
-    }
+    }/*
     if (e->type == sfEvtResized) {
         if (w->height != e->size.height || w->width != e->size.width) {
             w->height = e->size.height;
             w->width = e->size.width;
         }
-    }
+    }*/
+    return 0;
 }
 
 int run(int id)

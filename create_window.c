@@ -18,6 +18,7 @@ window_t *create_window(int nb_fb)
     w->nb_fb = nb_fb;
     w->width = W_WIDTH;
     w->height = W_HEIGHT;
+    w->timer = sfClock_create();
     if (!w->window || create_framebuffer(w) == -1)
         return NULL;
     return w;
@@ -38,6 +39,7 @@ int create_framebuffer(window_t *w)
 void destroy_window(window_t *w)
 {
     sfRenderWindow_destroy(w->window);
+    sfClock_destroy(w->timer);
     destroy_framebuffer(w);
     free(w);
 }

@@ -29,7 +29,6 @@ framebuffer_t *fb)
 void blur(framebuffer_t *fb, unsigned int coef)
 {
     sfVector2u coord = {0, 0};
-    sfVector2u coord_end = {fb->width - (coef / 2), fb->height - coord.y};
     unsigned int pos;
 
     while (coord.y < fb->height - coef) {

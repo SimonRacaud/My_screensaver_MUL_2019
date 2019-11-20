@@ -2,10 +2,9 @@
 ** EPITECH PROJECT, 2019
 ** my_sreensaver_2019
 ** File description:
-** simulate water
+** pipe with road
 */
 
-//#include "w03_pipe.h"
 #include "my_screensaver.h"
 
 static void draw_triangle(framebuffer_t *fb, int *shift)
@@ -43,13 +42,10 @@ static void draw_pipe(framebuffer_t *fb, int *shift)
         *shift = 0;
 }
 
-static void display(window_t *w, sfClock *timer, int *shift)
+static void display(window_t *w, int *shift)
 {
-    if (sfClock_getElapsedTime(timer).microseconds > 0) {
-        sfClock_restart(timer);
-        framebuffer_clear(w->fb);
-        draw_pipe(w->fb, shift);
-    }
+    framebuffer_clear(w->fb);
+    draw_pipe(w->fb, shift);
     sfRenderWindow_clear(w->window, sfBlack);
     display_framebuffer(w->fb, w->window);
     sfRenderWindow_display(w->window);
@@ -59,17 +55,15 @@ int run03(void)
 {
     sfEvent event;
     window_t *w = create_window(1);
-    sfClock *timer = sfClock_create();
     int shift = 0;
 
     if (!w)
         return 1;
     while (sfRenderWindow_isOpen(w->window)) {
-        display(w, timer, &shift);
+        display(w, &shift);
         while (sfRenderWindow_pollEvent(w->window, &event))
             event_manager(w, &event);
     }
     destroy_window(w);
-    sfClock_destroy(timer);
     return 0;
 }
