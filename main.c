@@ -8,7 +8,7 @@
 #include "my.h"
 #include "my_screensaver.h"
 
-const int (*animations[MAX_ID])(void) =
+const int (*animations[MAX_ID])(program_t *prog) =
 {
     &run01,
     &run02,
@@ -39,35 +39,37 @@ int main(int ac, char **av)
     return 0;
 }
 
-int event_manager(window_t *w, sfEvent *e)
+int event_manager(window_t *w, sfEvent *e, program_t *prog)
 {
-    if (e->type == sfEvtClosed) {
-        printf("A\n");
+    if (e->type == sfEvtClosed || e->key.code == sfKeyEscape) {
+        prog->id = 0;
         sfRenderWindow_close(w->window);
-        printf("B\n");
     } else if (e->type == sfEvtKeyPressed) {
         if (e->key.code == sfKeyLeft) {
-
+            prog->id--;
+            sfRenderWindow_close(w->window);
         } else if (e->key.code == sfKeyRight) {
-
+            prog->id++;
+            sfRenderWindow_close(w->window);
         }
-    }/*
+        if (e->key.code == sfKeyUp)
+            sfRenderWindow_close(w->window);
+    }
     if (e->type == sfEvtResized) {
-        if (w->height != e->size.height || w->width != e->size.width) {
-            w->height = e->size.height;
-            w->width = e->size.width;
-        }
-    }*/
+        prog->height = e->size.height;
+        prog->width = e->size.width;
+    }
     return 0;
 }
 
 int run(int id)
 {
+    program_t prog = {id, W_HEIGHT, W_WIDTH};
     int ret = 0;
 
     srand(time(NULL));
-    ret = animations[id - 1]();
-    if (ret == 1)
-        run(id);
-    return 0;
+    do {
+        ret = animations[prog.id - 1](&prog);
+    } while (prog.id > 0 && prog.id <= MAX_ID);
+    return ret;
 }

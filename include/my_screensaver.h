@@ -22,6 +22,12 @@ static const int FRAMERATE = 60;
 static const int W_WIDTH = 1920;
 static const int W_HEIGHT = 1080;
 
+typedef struct program {
+    int id;
+    unsigned int height;
+    unsigned int width;
+} program_t;
+
 typedef struct window {
     sfClock *timer;
     sfRenderWindow *window;
@@ -30,25 +36,23 @@ typedef struct window {
     framebuffer_t *fb3;
     framebuffer_t *fb4;
     int nb_fb;
-    unsigned int height;
-    unsigned int width;
 } window_t;
 
 void usage(void);
 void description(void);
 int check_get_id(char *str);
 
-window_t *create_window(int nb_fb);
-int create_framebuffer(window_t *w);
+window_t *create_window(int nb_fb, program_t *prog);
+int create_framebuffer(window_t *w, program_t *prog);
 void destroy_window(window_t *w);
 void destroy_framebuffer(window_t *w);
 
-int event_manager(window_t *w, sfEvent *e);
+int event_manager(window_t *w, sfEvent *e, program_t *prog);
 int run(int id);
 
-int run01(void);
-int run02(void);
-int run03(void);
-int run04(void);
+int run01(program_t *prog);
+int run02(program_t *prog);
+int run03(program_t *prog);
+int run04(program_t *prog);
 
 #endif

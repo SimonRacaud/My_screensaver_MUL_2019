@@ -74,10 +74,10 @@ static void display(window_t *w, sfClock *timer, water_t *water)
     sfRenderWindow_display(w->window);
 }
 
-int run02(void)
+int run02(program_t *prog)
 {
     sfEvent event;
-    window_t *w = create_window(2);
+    window_t *w = create_window(2, prog);
     sfClock *timer = sfClock_create();
     water_t water1;
     water_t water2;
@@ -91,7 +91,7 @@ int run02(void)
     while (sfRenderWindow_isOpen(w->window)) {
         display(w, timer, &water1);
         while (sfRenderWindow_pollEvent(w->window, &event))
-            event_manager(w, &event);
+            event_manager(w, &event, prog);
     }
     destroy_window(w);
     free(water1.p01);

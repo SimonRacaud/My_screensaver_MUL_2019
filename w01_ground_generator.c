@@ -43,11 +43,11 @@ static void display(map_t *map, window_t *w, sfClock *timer)
     sfRenderWindow_display(w->window);
 }
 
-int run01(void)
+int run01(program_t *prog)
 {
     sfEvent event;
-    window_t *w = create_window(1);
-    map_t map = {0, W_HEIGHT, W_WIDTH, 100};
+    window_t *w = create_window(1, prog);
+    map_t map = {0, prog->height, prog->width, 100};
     sfClock *timer = sfClock_create();
 
     generate_map(&map, w->fb);
@@ -56,7 +56,7 @@ int run01(void)
     while (sfRenderWindow_isOpen(w->window)) {
         display(&map, w, timer);
         while (sfRenderWindow_pollEvent(w->window, &event))
-            event_manager(w, &event);
+            event_manager(w, &event, prog);
     }
     destroy_window(w);
     sfClock_destroy(timer);

@@ -51,10 +51,10 @@ static void display(window_t *w, int *shift)
     sfRenderWindow_display(w->window);
 }
 
-int run03(void)
+int run03(program_t *prog)
 {
     sfEvent event;
-    window_t *w = create_window(1);
+    window_t *w = create_window(1, prog);
     int shift = 0;
 
     if (!w)
@@ -62,7 +62,7 @@ int run03(void)
     while (sfRenderWindow_isOpen(w->window)) {
         display(w, &shift);
         while (sfRenderWindow_pollEvent(w->window, &event))
-            event_manager(w, &event);
+            event_manager(w, &event, prog);
     }
     destroy_window(w);
     return 0;

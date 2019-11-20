@@ -7,7 +7,7 @@
 
 #include "my_screensaver.h"
 
-static void draw_pipe_a(framebuffer_t *fb, int *shift)
+static void draw_pipe(framebuffer_t *fb, int *shift, int mode)
 {
     int nb_circle = 26;
     sfColor c = {255, 255, 255, 255};
@@ -22,27 +22,9 @@ static void draw_pipe_a(framebuffer_t *fb, int *shift)
         circle.color.r = c.r - i * 5;
         circle.color.g = c.g - i * 5;
         circle.color.b = c.b - i * 5;
-        circle.color.a = 255 - i / (*shift - 2);
-        draw_circle(fb, &circle);
-    }
-}
-
-static void draw_pipe_b(framebuffer_t *fb, int *shift)
-{
-    int nb_circle = 26;
-    sfColor c = {255, 255, 255, 255};
-    double space_circle = 3;
-    sfVector2u pos = {fb->width - 20, fb->height / 2};
-    circle_t circle = {pos, c, 0, 0};
-
-    for (int i = 1; i <= nb_circle; i++) {
-        circle.size = (i * i * space_circle) + (*shift * i);
-        circle.border = circle.size - 5;
-        circle.pos.x += (*shift) + i;
-        circle.color.r = c.r - i * 5;
-        circle.color.g = c.g - i * 5;
-        circle.color.b = c.b - i * 5;
-        if (circle.size < 0)
+        if (mode > 0)
+            circle.color.a = 255 - i / (*shift - 2);
+        if ((mode < 0 && circle.size < 0) || mode > 0)
             draw_circle(fb, &circle);
     }
 }
@@ -64,17 +46,13 @@ static void display(window_t *w)
         }
     }
     framebuffer_clear(w->fb);
-    if (mode > 0)
-        draw_pipe_a(w->fb, &shift);
-    else
-        draw_pipe_b(w->fb, &shift);
+    draw_pipe(w->fb, &shift, mode);
 }
 
-int run04(void)
+int run04(program_t *prog)
 {
-    int ret;
     sfEvent event;
-    window_t *w = create_window(1);
+    window_t *w = create_window(1, prog);
 
     if (!w)
         return 1;
@@ -84,7 +62,7 @@ int run04(void)
         sfRenderWindow_display(w->window);
         display(w);
         while (sfRenderWindow_pollEvent(w->window, &event))
-            event_manager(w, &event);
+            event_manager(w, &event, prog);
     }
     destroy_window(w);
     return 0;

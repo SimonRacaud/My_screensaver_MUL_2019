@@ -7,29 +7,27 @@
 
 #include "my_screensaver.h"
 
-window_t *create_window(int nb_fb)
+window_t *create_window(int nb_fb, program_t *prog)
 {
     window_t *w = malloc(sizeof(window_t));
-    sfVideoMode mode = {W_WIDTH, W_HEIGHT, 32};
+    sfVideoMode mode = {prog->width, prog->height, 32};
 
     w->window = sfRenderWindow_create(mode, TITLE_W, sfClose/* | sfFullscreen*/
     | sfResize, NULL);
     sfRenderWindow_setFramerateLimit(w->window, FRAMERATE);
     w->nb_fb = nb_fb;
-    w->width = W_WIDTH;
-    w->height = W_HEIGHT;
     w->timer = sfClock_create();
-    if (!w->window || create_framebuffer(w) == -1)
+    if (!w->window || create_framebuffer(w, prog) == -1)
         return NULL;
     return w;
 }
 
-int create_framebuffer(window_t *w)
+int create_framebuffer(window_t *w, program_t *prog)
 {
     framebuffer_t **fba[4] = {&w->fb, &w->fb2, &w->fb3, &w->fb4};
 
     for (int i = 0; i < w->nb_fb; i++) {
-        *fba[i] = framebuffer_create(w->width, w->height);
+        *fba[i] = framebuffer_create(prog->width, prog->height);
         if (*fba[i] == NULL)
             return -1;
     }
