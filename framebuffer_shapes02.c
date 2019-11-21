@@ -38,3 +38,18 @@ void framebuffer_clear(framebuffer_t *fb)
         fb->pixels[i + 3] = 255;
     }
 }
+
+int draw_sinusoidal(framebuffer_t *fb, sinusoidal_t *sinu)
+{
+    sfVector2i coo = sinu->start;
+    unsigned int space_y = (sinu->start.y - sinu->coef.y / 2);
+
+    while (coo.x < fb->width) {
+        coo.y = sin(sinu->shift + (double)coo.x / sinu->coef.x) * sinu->coef.y;
+        coo.y += space_y;
+        for (unsigned int i = 0; i < sinu->border; i++)
+            put_pixel(fb, coo.x, coo.y + i, &sinu->color);
+        coo.x++;
+    }
+    return 0;
+}

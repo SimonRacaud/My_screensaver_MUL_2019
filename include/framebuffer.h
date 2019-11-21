@@ -30,6 +30,15 @@ typedef struct circle {
     double border;
 } circle_t;
 
+typedef struct sinusoidal {
+    sfVector2i start;
+    sfVector2i coef;
+    sfColor color;
+    unsigned int border;
+    int len;
+    double shift;
+} sinusoidal_t;
+
 framebuffer_t *framebuffer_create(unsigned int width, unsigned int height);
 void framebuffer_destroy(framebuffer_t *buffer);
 void display_framebuffer(framebuffer_t *fb, sfRenderWindow *w);
@@ -47,6 +56,7 @@ sfColor *c);
 int draw_circle(framebuffer_t *fb, circle_t *c);
 int draw_circle2(framebuffer_t *framebuffer, sfVector2i *center, int radius,
 sfColor *c);
+int draw_sinusoidal(framebuffer_t *fb, sinusoidal_t *sin);
 
 double perlin(double x, double y, int res, unsigned int *perm);
 void mix_permutation_table(unsigned int *permutation_table);
