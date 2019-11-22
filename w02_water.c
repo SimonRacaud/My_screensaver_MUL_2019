@@ -18,7 +18,7 @@ sfVector2i *size_matrix)
     for (int p = 0; p < size; p++) {
         coord.y = p / size_matrix->x;
         coord.x = p - (coord.y * size_matrix->x);
-        per = (perlin(coord.x, coord.y, 90, perm) + 1) / 2 * 255;
+        per = ((perlin(coord.x, coord.y, 150, perm) + 1) / 2) * 200 + 55;
         array[p] = per;
     }
 }
@@ -29,32 +29,35 @@ static void init(water_t *water, framebuffer_t *fb)
     sfVector2i size = {fb->width, fb->height};
 
     water->p01 = malloc(sizeof(unsigned int) * fb->width * fb->height);
-    //water->p02 = malloc(sizeof(unsigned int) * fb->width * fb->height);
+    water->p02 = malloc(sizeof(unsigned int) * fb->width * fb->height);
     water->shift = 0;
     for (unsigned int i = 0; i <= 255; i++)
         perm[i] = i;
     fill_perlin(water->p01, perm, &size);
-    //size.y = fb->height;
-    //size.x = fb->width;
-    //fill_perlin(water->p02, perm, &size);
+    size.y = fb->height;
+    size.x = fb->width;
+    fill_perlin(water->p02, perm, &size);
 }
 
 static void water_effect(framebuffer_t *fb, water_t *water)
 {
     unsigned int size = fb->height * fb->width * 4;
     unsigned int pix_shift;
+    unsigned int pix_shift2;
     sfVector2u coord;
 
     for (unsigned int p = 0; p < size; p += 4) {
         coord.y = p / (fb->width * 4);
         coord.x = p - (coord.y * fb->width * 4);
         pix_shift = (p / 4) + water->shift;
+        if ((p / 4) > water->shift)
+            pix_shift2 = (p / 4) - water->shift;
         //if (coord.x >= fb->width * 4 - water->shift)
         //    pix_shift = (p / 4) - water->shift;
-        fb->pixels[p] = water->p01[p / 4];
-        fb->pixels[p + 1] = water->p01[p / 4];
-        fb->pixels[p + 2] = water->p01[p / 4];
-        fb->pixels[p + 3] = 125;
+        fb->pixels[p] = (water->p01[pix_shift2] + water->p02[pix_shift]) / 6;
+        fb->pixels[p + 1] = (water->p01[pix_shift2] + water->p02[pix_shift]) / 6;
+        fb->pixels[p + 2] = (water->p01[pix_shift2] + water->p02[pix_shift]) / 2;
+        fb->pixels[p + 3] = 255;
     }
     if (water->shift == fb->width)
         water->shift = 0;

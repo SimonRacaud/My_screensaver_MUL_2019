@@ -57,6 +57,7 @@ int draw_circle(framebuffer_t *fb, circle_t *c);
 int draw_circle2(framebuffer_t *framebuffer, sfVector2i *center, int radius,
 sfColor *c);
 int draw_sinusoidal(framebuffer_t *fb, sinusoidal_t *sin);
+int draw_spiral(framebuffer_t *fb, sfVector2u *pos, int r);
 
 double perlin(double x, double y, int res, unsigned int *perm);
 void mix_permutation_table(unsigned int *permutation_table);

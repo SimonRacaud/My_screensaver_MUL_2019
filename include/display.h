@@ -11,11 +11,11 @@
 static const char *DESCRIPTION[MAX_ID] =
 {
     "A random 2D map generator.",
-    "A2",
-    "A3",
-    "A4",
-    "A5",
-    "A6",
+    "Fluid simulator.",
+    "Infinite pipe with path.",
+    "3D animated capsule",
+    "Pong game with sinusoidal paddle",
+    "Crazy spiral",
     "A7",
     "A8"
 };

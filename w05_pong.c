@@ -23,7 +23,7 @@ static void display(window_t *w, pong_t *pong)
     draw_elements(pong, w->fb);
 }
 
-static void init_sinus(pong_t *pong, program_t *prog, framebuffer_t *fb)
+static void init_sinus(pong_t *pong, framebuffer_t *fb)
 {
     sfColor color_curve = {255, 255, 255, 255};
     sfVector2i pos_curve1 = {0, 100};
@@ -51,7 +51,7 @@ static void init_pong(pong_t *pong, program_t *prog, framebuffer_t *fb)
     pong->color_balle = color_balle;
     pong->vel_balle.x = 0;
     pong->vel_balle.y = 8;
-    init_sinus(pong, prog, fb);
+    init_sinus(pong, fb);
 }
 
 int run05(program_t *prog)

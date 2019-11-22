@@ -19,7 +19,8 @@ SRC	=	main.c			\
 		w03_pipe.c			\
 		w04_pipe_transform.c		\
 		w05_pong.c			\
-		w05_pong_balle.c
+		w05_pong_balle.c		\
+		w06_spiral.c
 
 OBJ	=	$(SRC:.c=.o)
 

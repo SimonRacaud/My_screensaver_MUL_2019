@@ -43,7 +43,7 @@ sinusoidal_t *sinus, char type)
 
 static void check_collision(pong_t *pong, framebuffer_t *fb)
 {
-    if (pong->pos_balle.x >= fb->width || pong->pos_balle.x <= 0) {
+    if (pong->pos_balle.x >= (int)fb->width || pong->pos_balle.x <= 0) {
         bounce(&pong->vel_balle, 'Y', 0, 0);
         return;
     }

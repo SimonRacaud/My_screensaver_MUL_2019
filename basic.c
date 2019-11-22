@@ -18,6 +18,8 @@ void usage(void)
     my_putstr("and quit.\n\t-h\t\tprint the usage and quit.\n\n");
     my_putstr("USER INTERACTIONS\n\tLEFT_ARROW\tswitch to the previous ");
     my_putstr("animation.\n\tRIGHT_ARROW\tswitch to the next animation.\n");
+    my_putstr("\tUP_ARROW\tReload the window.\n");
+    my_putstr("\tESCAPE\t\tClose the window.\n");
     my_putstr("\033[0m");
 }
 

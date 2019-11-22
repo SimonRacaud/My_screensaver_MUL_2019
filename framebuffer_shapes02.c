@@ -44,12 +44,25 @@ int draw_sinusoidal(framebuffer_t *fb, sinusoidal_t *sinu)
     sfVector2i coo = sinu->start;
     unsigned int space_y = (sinu->start.y - sinu->coef.y / 2);
 
-    while (coo.x < fb->width) {
+    while (coo.x < (int)fb->width) {
         coo.y = sin(sinu->shift + (double)coo.x / sinu->coef.x) * sinu->coef.y;
         coo.y += space_y;
         for (unsigned int i = 0; i < sinu->border; i++)
             put_pixel(fb, coo.x, coo.y + i, &sinu->color);
         coo.x++;
+    }
+    return 0;
+}
+
+int draw_spiral(framebuffer_t *fb, sfVector2u *pos, int r)
+{
+    sfColor c = {255, 255, 255, 255};
+    sfVector2u coord;
+
+    for (double t = 0; t < 50; t += 0.01) {
+        coord.x = r * (cos(t) + t * sin(t)) + pos->x;
+        coord.y = r * (sin(t) - t * cos(t)) + pos->y;
+        put_pixel(fb, coord.x, coord.y, &c);
     }
     return 0;
 }
