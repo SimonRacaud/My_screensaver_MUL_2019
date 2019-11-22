@@ -56,5 +56,6 @@ int run03(program_t *prog);
 int run04(program_t *prog);
 int run05(program_t *prog);
 int run06(program_t *prog);
+int run07(program_t *prog);
 
 #endif

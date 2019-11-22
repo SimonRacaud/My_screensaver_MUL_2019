@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_sreensaver_2019
+** my_screensaver_2019
 ** File description:
 ** spiral
 */
