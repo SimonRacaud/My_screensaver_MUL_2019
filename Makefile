@@ -21,7 +21,8 @@ SRC	=	main.c			\
 		w05_pong.c			\
 		w05_pong_balle.c		\
 		w06_spiral.c			\
-		w07_animated_sort.c
+		w07_animated_sort.c		\
+		quick_sort.c
 
 OBJ	=	$(SRC:.c=.o)
 
