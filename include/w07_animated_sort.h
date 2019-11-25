@@ -11,8 +11,11 @@
 #include "my_screensaver.h"
 
 typedef struct qsort {
+    int *array;
     int pivot;
     int idx_pivot;
+    int idx_begin;
+    int idx_end;
     int cur_left;
     int cur_right;
     int size;

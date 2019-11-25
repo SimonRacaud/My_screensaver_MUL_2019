@@ -7,7 +7,7 @@
 
 #include "w05_pong.h"
 
-static void bounce(sfVector2i *vel_balle, char axis, int coef, int delta_cuve)
+static void bounce(sfVector2i *vel_balle, char axis, int delta_cuve)
 {
     if (axis == 'X') {
         if (vel_balle->y > 0) {
@@ -33,21 +33,20 @@ sinusoidal_t *sinus, char type)
 {
     int pos_curve_y = get_pos_y_curve(pos_balle->x, sinus);
     int delta_cuve = get_pos_y_curve(pos_balle->x + 30, sinus) - pos_curve_y;
-    int center_crv = (sinus->start.y - sinus->coef.y / 2);
 
     if (type == 'U') {
         if (pos_balle->y <= pos_curve_y + 15 && vel_balle->y < 0)
-            bounce(vel_balle, 'X', center_crv - pos_curve_y, delta_cuve);
+            bounce(vel_balle, 'X', delta_cuve);
     } else {
         if (pos_balle->y >= pos_curve_y - 15 && vel_balle->y > 0)
-            bounce(vel_balle, 'X', center_crv - pos_curve_y, delta_cuve);
+            bounce(vel_balle, 'X', delta_cuve);
     }
 }
 
 static void check_collision(pong_t *pong, framebuffer_t *fb)
 {
     if (pong->pos_balle.x >= (int)fb->width || pong->pos_balle.x <= 0) {
-        bounce(&pong->vel_balle, 'Y', 0, 0);
+        bounce(&pong->vel_balle, 'Y', 0);
         return;
     }
     if (pong->pos_balle.y <= pong->sin01.start.y + pong->sin01.coef.y)

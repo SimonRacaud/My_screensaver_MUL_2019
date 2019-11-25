@@ -7,25 +7,33 @@
 
 #include "w07_animated_sort.h"
 
-static void display(window_t *w, int *array, qsort_t *qs)
+static void display(window_t *w, qsort_t *qs)
 {
-    unsigned int width = w->fb->width / (qs->size * 2);
-    sfColor c = {255, 255, 255, 255};
-    sfVector2u pos_rect = {20, 20};
-    sfVector2u size = {width, 0};
-    int space_x = w->fb->width / (qs->size * 2);
+    unsigned int lwidth = (w->fb->width / (qs->size + 2)) - 1;
+    sfColor *c;
+    sfColor white = {255, 255, 255, 255};
+    sfColor red = {255, 0, 0, 255};
+    sfColor blue = {0, 0, 255, 255};
+    sfVector2u pos_rect = {lwidth, 20};
+    sfVector2u size = {lwidth, 0};
 
     sfRenderWindow_clear(w->window, sfBlack);
     framebuffer_clear(w->fb);
     for (int i = 0; i < qs->size; i++) {
-        size.y = ((array[i] + 1) % qs->size) * (w->fb->height / qs->size - 2);
-        draw_rect(w->fb, &pos_rect, &size, &c);
-        pos_rect.x += size.x + space_x;
+        if (i == qs->idx_begin || i == qs->idx_end)
+            c = &blue;
+        else if (i == qs->cur_right || i == qs->cur_left)
+            c = &red;
+        else
+            c = &white;
+        size.y = (qs->array[i] % qs->size) * (w->fb->height / (qs->size + 2));
+        draw_rect(w->fb, &pos_rect, &size, c);
+        pos_rect.x += size.x + 1;
     }
     display_framebuffer(w->fb, w->window);
     sfRenderWindow_display(w->window);
-    while (sfClock_getElapsedTime(w->timer).microseconds < 100000);
-    sfClock_restart(w->timer);
+    //while (sfClock_getElapsedTime(w->timer).microseconds < 1000);
+    //sfClock_restart(w->timer);
 }
 
 static void generate_mixed_array(int *array, int size)
@@ -51,42 +59,56 @@ static void swap(int *a, int *b)
     *b = t;
 }
 
-int *quick_sort_disp(int *array, int *idx, const int size, window_t *w)
+void quick_sort_disp(qsort_t *qs, int idx_begin, int idx_end, window_t *w)
 {
-    qsort_t qsort = {array[idx[0]], idx[0], (idx[0] - 1), (idx[1] + 1), size};
+    qs->pivot = qs->array[idx_begin];
+    qs->cur_left = idx_begin - 1;
+    qs->cur_right = idx_end + 1;
+    qs->idx_pivot = idx_begin;
+    qs->idx_begin = idx_begin;
+    qs->idx_end = idx_end;
 
-    if (idx[0] - 1 == idx[1])
+    if (qs->idx_begin - 1 == qs->idx_end)
         return;
     while (1) {
         do {
-            qsort.cur_left++;
-        } while (array[qsort.cur_left] < qsort.pivot);
+            qs->cur_left++;
+        } while (qs->array[qs->cur_left] < qs->pivot);
         do {
-            qsort.cur_right--;
-        } while (array[qsort.cur_right] > qsort.pivot);
-        if (qsort.cur_left >= qsort.cur_right)
+            qs->cur_right--;
+        } while (qs->array[qs->cur_right] > qs->pivot);
+        if (qs->cur_left >= qs->cur_right)
             break;
-        swap(&array[qsort.cur_left], &array[qsort.cur_right]);
-        display(w, array, &qsort);
+        swap(&qs->array[qs->cur_left], &qs->array[qs->cur_right]);
+        display(w, qs);
     }
-    //quick_sort_disp(array, idx[0], qsort.cur_right - 1, size, w);
-    //quick_sort_disp(array, qsort.cur_right + 1, idx[1], size, w);
+    quick_sort_disp(qs, qs->idx_begin, qs->cur_right - 1, w);
+    quick_sort_disp(qs, qs->cur_right + 1, qs->idx_end, w);
+}
+
+static void init_qsort(qsort_t *qsort, int size, int *array)
+{
+    qsort->array = array;
+    qsort->idx_pivot = 0;
+    qsort->size = size;
 }
 
 int run07(program_t *prog)
 {
     sfEvent event;
     window_t *w = create_window(1, prog);
-    int array[42];
-    int idx[2] = {0, 41};
+    int size_array = 200;
+    int array[200];
+    qsort_t qsort;
 
-    generate_mixed_array(array, 42);
+    init_qsort(&qsort, size_array, array);
+    generate_mixed_array(array, size_array);
     if (!w)
         return 1;
     while (sfRenderWindow_isOpen(w->window)) {
         while (sfRenderWindow_pollEvent(w->window, &event))
             event_manager(w, &event, prog);
-        quick_sort_disp(array, idx, 42, w);
+        quick_sort_disp(&qsort, 0, (size_array - 1), w);
     }
     destroy_window(w);
     return 0;
