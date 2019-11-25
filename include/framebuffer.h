@@ -44,6 +44,7 @@ void framebuffer_destroy(framebuffer_t *buffer);
 void display_framebuffer(framebuffer_t *fb, sfRenderWindow *w);
 void framebuffer_perlin_noise(framebuffer_t *fb);
 void framebuffer_clear(framebuffer_t *fb);
+void framebuffer_substract(framebuffer_t *fb, int nb);
 
 int put_pixel(framebuffer_t *framebuffer, unsigned int x, unsigned int y,
 sfColor *color);

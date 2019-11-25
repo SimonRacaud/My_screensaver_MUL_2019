@@ -18,7 +18,7 @@ sfVector2i *size_matrix)
     for (int p = 0; p < size; p++) {
         coord.y = p / size_matrix->x;
         coord.x = p - (coord.y * size_matrix->x);
-        per = ((perlin(coord.x, coord.y, 150, perm) + 1) / 2) * 200 + 55;
+        per = ((perlin(coord.x, coord.y, 150, perm) + 1) / 2) * 155 + 100;
         array[p] = per;
     }
 }
@@ -42,21 +42,18 @@ static void init(water_t *water, framebuffer_t *fb)
 static void water_effect(framebuffer_t *fb, water_t *water)
 {
     unsigned int size = fb->height * fb->width * 4;
-    unsigned int pix_shift;
-    unsigned int pix_shift2;
+    unsigned int shift1;
+    unsigned int shift2;
     sfVector2u coord;
 
     for (unsigned int p = 0; p < size; p += 4) {
         coord.y = p / (fb->width * 4);
         coord.x = p - (coord.y * fb->width * 4);
-        pix_shift = (p / 4) + water->shift;
+        shift1 = (p / 4) + water->shift;
         if ((p / 4) > water->shift)
-            pix_shift2 = (p / 4) - water->shift;
-        //if (coord.x >= fb->width * 4 - water->shift)
-        //    pix_shift = (p / 4) - water->shift;
-        fb->pixels[p] = (water->p01[pix_shift2] + water->p02[pix_shift]) / 6;
-        fb->pixels[p + 1] = (water->p01[pix_shift2] + water->p02[pix_shift]) / 6;
-        fb->pixels[p + 2] = (water->p01[pix_shift2] + water->p02[pix_shift]) / 2;
+            shift2 = (p / 4) - water->shift;
+        fb->pixels[p + 1] = water->p02[shift1] / 2;
+        fb->pixels[p + 2] = (water->p01[shift2] + water->p02[shift1]) / 2;
         fb->pixels[p + 3] = 255;
     }
     if (water->shift == fb->width)
@@ -65,11 +62,10 @@ static void water_effect(framebuffer_t *fb, water_t *water)
         water->shift++;
 }
 
-static void display(window_t *w, sfClock *timer, water_t *water)
+static void display(window_t *w, water_t *water)
 {
-    if (sfClock_getElapsedTime(timer).microseconds > 2) {
-        sfClock_restart(timer);
-        //blur(w->fb, 3);
+    if (sfClock_getElapsedTime(w->timer).microseconds > 2) {
+        sfClock_restart(w->timer);
         water_effect(w->fb, water);
     }
     sfRenderWindow_clear(w->window, sfBlack);
@@ -81,24 +77,18 @@ int run02(program_t *prog)
 {
     sfEvent event;
     window_t *w = create_window(2, prog);
-    sfClock *timer = sfClock_create();
-    water_t water1;
-    water_t water2;
+    water_t water;
 
-    init(&water1, w->fb);
-    init(&water2, w->fb2);
-    water_effect(w->fb, &water1);
-    water_effect(w->fb2, &water2);
+    init(&water, w->fb);
+    framebuffer_clear(w->fb);
     if (!w)
         return 1;
     while (sfRenderWindow_isOpen(w->window)) {
-        display(w, timer, &water1);
+        display(w, &water);
         while (sfRenderWindow_pollEvent(w->window, &event))
             event_manager(w, &event, prog);
     }
     destroy_window(w);
-    free(water1.p01);
-    free(water2.p01);
-    sfClock_destroy(timer);
+    free(water.p01);
     return 0;
 }

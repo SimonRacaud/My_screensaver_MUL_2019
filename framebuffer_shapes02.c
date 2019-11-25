@@ -27,18 +27,6 @@ sfColor *c)
     return 0;
 }
 
-void framebuffer_clear(framebuffer_t *fb)
-{
-    int size = fb->width * fb->height * 4;
-
-    for (int i = 0; i < size; i += 4) {
-        fb->pixels[i] = 0;
-        fb->pixels[i + 1] = 0;
-        fb->pixels[i + 2] = 0;
-        fb->pixels[i + 3] = 255;
-    }
-}
-
 int draw_sinusoidal(framebuffer_t *fb, sinusoidal_t *sinu)
 {
     sfVector2i coo = sinu->start;

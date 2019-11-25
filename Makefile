@@ -10,6 +10,7 @@ SRC	=	main.c			\
 		framebuffer_shapes01.c	\
 		framebuffer_shapes02.c	\
 		framebuffer.c		\
+		framebuffer_ext.c	\
 		basic.c			\
 		perlin_noise.c		\
 		framebuffer_blur.c	\
@@ -22,7 +23,8 @@ SRC	=	main.c			\
 		w05_pong_balle.c		\
 		w06_spiral.c			\
 		w07_animated_sort.c		\
-		quick_sort.c
+		quick_sort.c			\
+		w07_animated_sort_qsort.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

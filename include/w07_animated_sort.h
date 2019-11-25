@@ -16,9 +16,10 @@ typedef struct qsort {
     int idx_pivot;
     int idx_begin;
     int idx_end;
-    int cur_left;
-    int cur_right;
     int size;
 } qsort_t;
+
+void quick_sort_disp(qsort_t *qs, int idx_begin, int idx_end, window_t *w);
+void display(window_t *w, qsort_t *qs);
 
 #endif

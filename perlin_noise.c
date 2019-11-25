@@ -56,6 +56,7 @@ double *dot_pt)
     double left_smooth = dot_pt[0] + sx * (dot_pt[1] - dot_pt[0]);
     double right_smooth = dot_pt[2] + sx * (dot_pt[3] - dot_pt[2]);
     double sy = 3 * pow(delta_y, 2) - 2 * pow(delta_y, 3);
+
     return left_smooth + sy * (right_smooth - left_smooth);
 }
 
