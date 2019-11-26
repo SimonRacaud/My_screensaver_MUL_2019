@@ -34,7 +34,7 @@ int main(int ac, char **av)
         description();
     } else {
         id = check_get_id(av[1]);
-        if (id < 1 || id >= MAX_ID) {
+        if (id < 1 || id > MAX_ID) {
             usage();
         } else if (!run(id))
             return 84;

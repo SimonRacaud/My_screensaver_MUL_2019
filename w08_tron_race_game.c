@@ -29,13 +29,13 @@ static void check_crash(vehicule_t *bike, framebuffer_t *fb)
 {
     unsigned int coord = ((bike->pos.y + 5) * fb->width * 4 + bike->pos.x * 4);
 
-    if ((bike->velocity.x > 0 && fb->pixels[coord + 44] > 80) ||
-    (!(bike->velocity.x > 0) && fb->pixels[coord] > 80)) {
+    if ((bike->velocity.x > 0 && fb->pixels[coord + 44] > 50) ||
+    (!(bike->velocity.x > 0) && fb->pixels[coord] > 50)) {
         bike->pos.y = rand() % (fb->height - 20) + 10;
         bike->pos.x = 0;
         bike->velocity.x = 6;
         bike->velocity.y = 0;
-        framebuffer_substract(fb, 180);
+        framebuffer_substract(fb, 50);
     }
 }
 

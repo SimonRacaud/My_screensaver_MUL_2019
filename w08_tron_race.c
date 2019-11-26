@@ -19,7 +19,7 @@ static vehicule_t *create_vehicule(unsigned int nbr, framebuffer_t *fb)
         v[i].pos.x = 0;
         v[i].pos.y = random;
         v[i].c = (sfColor){255, 255, 255, 255};
-        v[i].velocity.x = 6;
+        v[i].velocity.x = 8;
         v[i].velocity.y = 0;
     }
     return v;
@@ -43,7 +43,7 @@ int run08(program_t *prog)
 {
     sfEvent event;
     window_t *w = create_window(1, prog);
-    unsigned int nb_bike = 2;
+    unsigned int nb_bike = 4;
     vehicule_t *bike = create_vehicule(nb_bike, w->fb);
 
     if (!w)
