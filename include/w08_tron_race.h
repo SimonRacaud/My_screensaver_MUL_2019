@@ -11,9 +11,12 @@
 #include "my_screensaver.h"
 
 typedef struct vehicule {
-    sfVector2d pos;
+    sfVector2u pos;
     sfColor c;
-    sfVector2d velocity;
+    sfVector2i velocity;
 } vehicule_t;
+
+void move_vehicule(vehicule_t *v, int nb, framebuffer_t *fb);
+void change_dir_vehicule(vehicule_t *v, int nb);
 
 #endif

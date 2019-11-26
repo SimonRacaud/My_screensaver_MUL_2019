@@ -16,7 +16,8 @@ const int (*animations[MAX_ID])(program_t *prog) =
     &run04,
     &run05,
     &run06,
-    &run07
+    &run07,
+    &run08
 };
 
 int main(int ac, char **av)
@@ -35,8 +36,7 @@ int main(int ac, char **av)
         id = check_get_id(av[1]);
         if (id < 1 || id >= MAX_ID) {
             usage();
-        }
-        if (!run(id))
+        } else if (!run(id))
             return 84;
     }
     return 0;

@@ -7,15 +7,7 @@
 
 #include "w08_tron_race.h"
 
-void display(window_t *w, vehicule_t *bike)
-{
-    framebuffer_clear(w->fb);
-
-    display_framebuffer(w->fb, w->window);
-    sfRenderWindow_display(w->window);
-}
-
-vehicule_t *create_vehicule(unsigned int nbr, framebuffer_t *fb)
+static vehicule_t *create_vehicule(unsigned int nbr, framebuffer_t *fb)
 {
     vehicule_t *v = malloc(sizeof(vehicule_t) * nbr);
     int random;
@@ -23,13 +15,28 @@ vehicule_t *create_vehicule(unsigned int nbr, framebuffer_t *fb)
     if (v == NULL)
         return NULL;
     for (unsigned int i = 0; i < nbr; i++) {
-        random = rand() % fb->height;
+        random = rand() % (fb->height - 40) + 20;
         v[i].pos.x = 0;
         v[i].pos.y = random;
-        v[i].c = sfColor_fromRGB(random % 255, random % 255, random % 255);
-        v[i].velocity.x = 2;
+        v[i].c = (sfColor){255, 255, 255, 255};
+        v[i].velocity.x = 6;
         v[i].velocity.y = 0;
     }
+    return v;
+}
+
+static void display(window_t *w, vehicule_t *bike, int nb_bike)
+{
+    if (sfClock_getElapsedTime(w->timer).microseconds > 300000) {
+        sfClock_restart(w->timer);
+        change_dir_vehicule(bike, nb_bike);
+    }
+    framebuffer_substract(w->fb, 1);
+    for (int i = 0; i < nb_bike; i++)
+        draw_square(w->fb, &bike[i].pos, 10, &bike[i].c);
+    display_framebuffer(w->fb, w->window);
+    move_vehicule(bike, nb_bike, w->fb);
+    sfRenderWindow_display(w->window);
 }
 
 int run08(program_t *prog)
@@ -42,7 +49,7 @@ int run08(program_t *prog)
     if (!w)
         return 1;
     while (sfRenderWindow_isOpen(w->window)) {
-        display(w, bike);
+        display(w, bike, nb_bike);
         while (sfRenderWindow_pollEvent(w->window, &event))
             event_manager(w, &event, prog);
     }

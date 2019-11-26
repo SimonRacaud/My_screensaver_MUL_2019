@@ -25,6 +25,8 @@ SRC	=	main.c			\
 		w07_animated_sort.c		\
 		quick_sort.c			\
 		w07_animated_sort_qsort.c	\
+		w08_tron_race.c			\
+		w08_tron_race_game.c		\
 
 OBJ	=	$(SRC:.c=.o)
 
