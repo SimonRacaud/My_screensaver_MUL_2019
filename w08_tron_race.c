@@ -31,7 +31,7 @@ static void display(window_t *w, vehicule_t *bike, int nb_bike)
         sfClock_restart(w->timer);
         change_dir_vehicule(bike, nb_bike);
     }
-    framebuffer_substract(w->fb, 1);
+    framebuffer_substract(w->fb, 2);
     for (int i = 0; i < nb_bike; i++)
         draw_square(w->fb, &bike[i].pos, 10, &bike[i].c);
     display_framebuffer(w->fb, w->window);
@@ -43,7 +43,7 @@ int run08(program_t *prog)
 {
     sfEvent event;
     window_t *w = create_window(1, prog);
-    unsigned int nb_bike = 4;
+    unsigned int nb_bike = 2;
     vehicule_t *bike = create_vehicule(nb_bike, w->fb);
 
     if (!w)

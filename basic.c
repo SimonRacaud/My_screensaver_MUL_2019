@@ -25,13 +25,14 @@ void usage(void)
 
 void description(void)
 {
-    my_putchar('\n');
+    my_putstr("\n\033[32m");
     for (int i = 0; i < MAX_ID; i++) {
         my_put_nbr(i + 1);
         my_putstr(": ");
         my_putstr(DESCRIPTION[i]);
         my_putstr("\n\n");
     }
+    my_putstr("\033[0m");
 }
 
 int check_get_id(char *str)

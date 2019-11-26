@@ -35,7 +35,6 @@ static void check_crash(vehicule_t *bike, framebuffer_t *fb)
         bike->pos.x = 0;
         bike->velocity.x = 6;
         bike->velocity.y = 0;
-        framebuffer_substract(fb, 50);
     }
 }
 
