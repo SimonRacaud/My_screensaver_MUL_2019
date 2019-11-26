@@ -30,6 +30,7 @@ SRC	=	main.c			\
 		w09_stickman.c			\
 		w10_bounce.c			\
 		w10_bounce_balle.c		\
+		w11_grush01.c
 
 OBJ	=	$(SRC:.c=.o)
 

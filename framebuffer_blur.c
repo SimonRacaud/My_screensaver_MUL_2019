@@ -33,7 +33,6 @@ void blur(framebuffer_t *fb, unsigned int coef)
 
     while (coord.y < fb->height - coef) {
         pos = (coord.y * fb->width * 4) + coord.x;
-        //printf("%d %u - %u %u\n", fb->pixels[pos], pos, coord.x, coord.y);
         fb->pixels[pos] = average(&coord, coef, fb);
         coord.x++;
         if (coord.x == (fb->width * 4) - (coef / 2)) {

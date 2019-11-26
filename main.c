@@ -19,7 +19,8 @@ const int (*animations[MAX_ID])(program_t *prog) =
     &run07,
     &run08,
     &run09,
-    &run10
+    &run10,
+    &run11
 };
 
 int main(int ac, char **av)
