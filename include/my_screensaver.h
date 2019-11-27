@@ -16,7 +16,7 @@
 #define TITLE_W "My Screensave Simon RACAUD"
 #define ERR_PARA "\033[31m./my_screensaver: bad arguments: 0 given but 1 is \
 required\nretry with -h\n\033[0m"
-#define MAX_ID 11
+#define MAX_ID 12
 
 static const int FRAMERATE = 60;
 static const int W_WIDTH = 1920;
@@ -61,5 +61,6 @@ int run08(program_t *prog);
 int run09(program_t *prog);
 int run10(program_t *prog);
 int run11(program_t *prog);
+int run12(program_t *prog);
 
 #endif

@@ -5,7 +5,7 @@
 ** w11_grush01
 */
 
-#include "w11_grush01.h"
+#include "my_screensaver.h"
 
 static void init_perm_table(unsigned int *table)
 {

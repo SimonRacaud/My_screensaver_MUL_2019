@@ -30,11 +30,12 @@ SRC	=	main.c			\
 		w09_stickman.c			\
 		w10_bounce.c			\
 		w10_bounce_balle.c		\
-		w11_grush01.c
+		w11_grush01.c			\
+		w12_grush02.c			\
 
 OBJ	=	$(SRC:.c=.o)
 
-NAME	=	my_sreeensaver
+NAME	=	my_screensaver
 
 CFLAGS	+= -Wall -Wextra -I./include -g
 

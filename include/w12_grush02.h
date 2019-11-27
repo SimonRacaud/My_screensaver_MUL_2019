@@ -5,8 +5,8 @@
 ** header
 */
 
-#ifndef H_W11
-#define H_W11
+#ifndef H_W12
+#define H_W12
 
 #include "my_screensaver.h"
 
