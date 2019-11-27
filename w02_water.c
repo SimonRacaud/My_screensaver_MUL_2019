@@ -54,7 +54,6 @@ static void water_effect(framebuffer_t *fb, water_t *water)
             shift2 = (p / 4) - water->shift;
         fb->pixels[p + 1] = water->p02[shift1] / 2;
         fb->pixels[p + 2] = (water->p01[shift2] + water->p02[shift1]) / 2;
-        fb->pixels[p + 3] = 255;
     }
     if (water->shift == fb->width)
         water->shift = 0;

@@ -16,8 +16,12 @@ static const char *DESCRIPTION[MAX_ID] =
     "3D animated capsule",
     "Pong game with sinusoidal paddle",
     "Crazy spiral",
+    "Animated sort",
     "Tron race",
-    "A8"
+    "...",
+    "Bounce balle",
+    "Grush01 : lightning",
+    "Grush02 : strange thing.."
 };
 
 #endif

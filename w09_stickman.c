@@ -37,7 +37,6 @@ static void display(window_t *w, limb_t *arml, limb_t *armr)
         if (armr->shift == (int)armr->len)
             armr->shift = 0;
     }
-    framebuffer_clear(w->fb);
     draw_circle2(w->fb, &pos_head, 50, &c_head);
     draw_rect(w->fb, &pos_body, &size_body, &c_head);
     draw_sinu(arml, w->fb);
@@ -73,6 +72,7 @@ int run09(program_t *prog)
     if (!w)
         return 1;
     while (sfRenderWindow_isOpen(w->window)) {
+        framebuffer_clear(w->fb);
         display(w, &arml, &armr);
         while (sfRenderWindow_pollEvent(w->window, &event))
             event_manager(w, &event, prog);

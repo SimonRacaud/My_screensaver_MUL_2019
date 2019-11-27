@@ -22,7 +22,6 @@ framebuffer_t *fb)
             sum += fb->pixels[pos];
         }
     }
-    //printf("sum : %d\n", sum);
     return (sum / (size * size));
 }
 
