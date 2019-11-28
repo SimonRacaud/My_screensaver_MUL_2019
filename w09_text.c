@@ -5,7 +5,7 @@
 ** Stick man
 */
 
-#include "w09_text.h"
+#include "my_screensaver.h"
 #include "my.h"
 
 static void display(window_t *w, char *text, sfColor *color)
