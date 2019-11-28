@@ -48,7 +48,7 @@ unsigned int posy, unsigned int b_size)
 
     init_perm_table(perm);
     for (coord.y = posy; coord.y < fb->height; coord.y++) {
-        per[0] = (perlin(coord.y, 0, 400, perm) + 1) / 2 * 1500;
+        per[0] = (perlin(coord.y, 0, 400, perm) + 1) / 2 * 800;
         per[1] = (perlin(coord.y, 0, 40, perm) + 1) / 2 * 200;
         per[2] = (perlin(coord.y, 0, 10, perm) + 1) / 2 * 100;
         if (coord.y == posy)

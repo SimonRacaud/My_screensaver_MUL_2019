@@ -9,16 +9,18 @@
 
 static void display_ext(window_t *w, face_t *face)
 {
+    draw_face(w->fb, &face->face_size, &face->face_pos);
     draw_oval(w->fb, 80, &face->pos_eyes01);
     draw_oval(w->fb, 80, &face->pos_eyes02);
     face->pos_sur01.y = 200 - face->shift_eyes / 4;
     face->pos_sur02.y = 200 - face->shift_eyes / 4;
-    draw_arc(w->fb, 100, 20, &face->pos_sur01);
-    draw_arc(w->fb, 100, 20, &face->pos_sur02);
+    draw_arc(w->fb, 90, 15, &face->pos_sur01);
+    draw_arc(w->fb, 90, 15, &face->pos_sur02);
 }
 
 static void display(window_t *w, face_t *face)
 {
+    sfVector2i pos_alpha = {w->fb->width / 2 - 280, 900};
     sfVector2i anime_eye01_pos = {0, face->pos_eyes01.y};
     sfVector2i anime_eye02_pos = {0, face->pos_eyes02.y};
 
@@ -28,16 +30,16 @@ static void display(window_t *w, face_t *face)
         if (face->shift_eyes >= 40 || face->shift_eyes <= -40)
             face->shift_eyes_mode *= -1;
     }
-    draw_face(w->fb, &face->face_size, &face->face_pos);
     anime_eye01_pos.x = w->fb->width / 2 + 200 + face->shift_eyes;
     anime_eye02_pos.x = w->fb->width / 2 - 200 + face->shift_eyes;
-    display_ext(w, face);
-    draw_circle2(w->fb, &anime_eye01_pos, 8, &face->black);
-    draw_circle2(w->fb, &anime_eye02_pos, 8, &face->black);
     face->shift_mooth += face->shift_mooth_mode;
     if (face->shift_mooth >= 4 || face->shift_mooth <= 1)
-        face->shift_mooth_mode *= -1;
+    face->shift_mooth_mode *= -1;
+    display_ext(w, face);
+    draw_circle2(w->fb, &anime_eye01_pos, 8, &face->white);
+    draw_circle2(w->fb, &anime_eye02_pos, 8, &face->white);
     draw_smile(w->fb, 200, &face->mooth_pos, face->shift_mooth);
+    display_str(w->fb, &pos_alpha, "the end", &face->white);
 }
 
 static void init_face(face_t *face, framebuffer_t *fb)

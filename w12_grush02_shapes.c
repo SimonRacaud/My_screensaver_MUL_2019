@@ -9,7 +9,7 @@
 
 void draw_face(framebuffer_t *fb, sfVector2u *size, sfVector2u *pos)
 {
-    sfColor color = {80, 20, 20, 255};
+    sfColor color = {255, 255, 255, 255};
     unsigned int y;
     double val = -28;
 
@@ -27,13 +27,13 @@ void draw_face(framebuffer_t *fb, sfVector2u *size, sfVector2u *pos)
 void draw_arc(framebuffer_t *fb, unsigned int width, unsigned int border,
 sfVector2u *pos)
 {
-    sfColor color = {255, 255, 255, 255};
+    sfColor color = {0, 0, 0, 255};
     unsigned int x;
     unsigned int y;
 
     for (double t = 0; t >= -3.1416; t -= 0.01) {
         x = pos->x + width * cos(t);
-        y = pos->y + width * sin(t) * 0.5;
+        y = pos->y + width * sin(t) * 0.35;
         for (unsigned int i = 0; i < border; i++) {
             put_pixel(fb, x, y + i, &color);
         }
@@ -43,7 +43,7 @@ sfVector2u *pos)
 void draw_smile(framebuffer_t *fb, unsigned int width, sfVector2u *pos,
 double div)
 {
-    sfColor color = {255, 255, 255, 255};
+    sfColor color = {0, 0, 0, 255};
     unsigned int x;
     unsigned int y;
 
@@ -58,7 +58,7 @@ double div)
 
 void draw_oval(framebuffer_t *fb, unsigned int width, sfVector2i *pos)
 {
-    sfColor color = {255, 255, 255, 255};
+    sfColor color = {0, 0, 0, 255};
     unsigned int x;
     unsigned int y;
 

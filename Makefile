@@ -32,6 +32,9 @@ SRC	=	main.c			\
 		w10_bounce_balle.c		\
 		w11_grush01.c			\
 		w12_grush02.c			\
+		w12_grush02_shapes.c		\
+		my_font.c			\
+		my_font_lines.c
 
 OBJ	=	$(SRC:.c=.o)
 

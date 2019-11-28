@@ -63,5 +63,11 @@ int draw_spiral(framebuffer_t *fb, sfVector2u *pos, int r);
 double perlin(double x, double y, int res, unsigned int *perm);
 void mix_permutation_table(unsigned int *permutation_table);
 
+void display_alpha(framebuffer_t *fb, sfVector2i *position, int alpha_code,
+sfColor *c);
+void display_str(framebuffer_t *fb, sfVector2i *position, char *str,
+sfColor *c);
+
 void blur(framebuffer_t *fb, unsigned int coef);
+
 #endif
