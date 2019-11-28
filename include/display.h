@@ -18,10 +18,10 @@ static const char *DESCRIPTION[MAX_ID] =
     "Crazy spiral",
     "Animated sort",
     "Tron race",
-    "...",
+    "Poetry",
     "Bounce balle",
     "Grush01 : lightning",
-    "Grush02 : strange thing.."
+    "Grush02 : The end"
 };
 
 #endif

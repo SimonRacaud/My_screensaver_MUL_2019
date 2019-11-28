@@ -14,6 +14,8 @@
 static const int space_x = 30;
 static const int space_y = 45;
 
+#define MAX_CHAR 28
+
 void set_line_v(framebuffer_t *fb, sfVector2i *position, sfVector2i *coord,
 sfColor *color);
 

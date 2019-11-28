@@ -27,7 +27,7 @@ SRC	=	main.c			\
 		w07_animated_sort_qsort.c	\
 		w08_tron_race.c			\
 		w08_tron_race_game.c		\
-		w09_stickman.c			\
+		w09_text.c			\
 		w10_bounce.c			\
 		w10_bounce_balle.c		\
 		w11_grush01.c			\
