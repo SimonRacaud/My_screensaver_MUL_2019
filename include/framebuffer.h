@@ -70,4 +70,7 @@ sfColor *c);
 
 void blur(framebuffer_t *fb, unsigned int coef);
 
+sfVector2u get_spline_point(double t, sfVector2u *points);
+void draw_spline(framebuffer_t *fb, sfVector2u *points);
+
 #endif

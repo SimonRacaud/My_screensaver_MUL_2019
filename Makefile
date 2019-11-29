@@ -5,16 +5,16 @@
 ## Project makefile
 ##
 
-SRC	=	main.c			\
-		create_window.c		\
-		framebuffer_shapes01.c	\
-		framebuffer_shapes02.c	\
-		framebuffer.c		\
-		framebuffer_ext.c	\
-		basic.c			\
-		perlin_noise.c		\
-		framebuffer_blur.c	\
-		w01_ground_generator.c	\
+SRC	=	main.c				\
+		create_window.c			\
+		framebuffer_shapes01.c		\
+		framebuffer_shapes02.c		\
+		framebuffer.c			\
+		framebuffer_ext.c		\
+		basic.c				\
+		perlin_noise.c			\
+		framebuffer_blur.c		\
+		w01_ground_generator.c		\
 		w01_ground_generator_ext.c	\
 		w02_water.c			\
 		w03_pipe.c			\
@@ -34,7 +34,9 @@ SRC	=	main.c			\
 		w12_grush02.c			\
 		w12_grush02_shapes.c		\
 		my_font.c			\
-		my_font_lines.c
+		my_font_lines.c			\
+		w13_spline.c			\
+		spline.c
 
 OBJ	=	$(SRC:.c=.o)
 

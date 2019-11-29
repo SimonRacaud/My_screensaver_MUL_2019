@@ -21,6 +21,7 @@ const int (*animations[MAX_ID])(program_t *prog) =
     &run09,
     &run10,
     &run11,
+    &run13,
     &run12
 };
 
@@ -46,7 +47,7 @@ int main(int ac, char **av)
     return 0;
 }
 
-int event_manager(window_t *w, sfEvent *e, program_t *prog)
+void event_manager(window_t *w, sfEvent *e, program_t *prog)
 {
     if (e->type == sfEvtClosed || e->key.code == sfKeyEscape) {
         prog->id = 0;
@@ -59,19 +60,20 @@ int event_manager(window_t *w, sfEvent *e, program_t *prog)
             prog->id++;
             sfRenderWindow_close(w->window);
         }
-        if (e->key.code == sfKeyUp)
+        if (e->key.code == sfKeyDown)
+            prog->fullscreen = !prog->fullscreen;
+        if (e->key.code == sfKeyUp || e->key.code == sfKeyDown)
             sfRenderWindow_close(w->window);
     }
     if (e->type == sfEvtResized) {
         prog->height = e->size.height;
         prog->width = e->size.width;
     }
-    return 0;
 }
 
 int run(int id)
 {
-    program_t prog = {id, W_HEIGHT, W_WIDTH};
+    program_t prog = {id, W_HEIGHT, W_WIDTH, 0};
     int ret = 0;
 
     srand(time(NULL));

@@ -12,8 +12,12 @@ window_t *create_window(int nb_fb, program_t *prog)
     window_t *w = malloc(sizeof(window_t));
     sfVideoMode mode = {prog->width, prog->height, 32};
 
-    w->window = sfRenderWindow_create(mode, TITLE_W, sfClose/* | sfFullscreen*/
-    | sfResize, NULL);
+    if (prog->fullscreen)
+        w->window = sfRenderWindow_create(mode, TITLE_W, sfClose | sfFullscreen
+        | sfResize, NULL);
+    else
+        w->window = sfRenderWindow_create(mode, TITLE_W, sfClose | sfResize,
+        NULL);
     sfRenderWindow_setFramerateLimit(w->window, FRAMERATE);
     w->nb_fb = nb_fb;
     w->timer = sfClock_create();

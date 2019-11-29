@@ -16,7 +16,7 @@
 #define TITLE_W "My Screensave Simon RACAUD"
 #define ERR_PARA "\033[31m./my_screensaver: bad arguments: 0 given but 1 is \
 required\nretry with -h\n\033[0m"
-#define MAX_ID 12
+#define MAX_ID 13
 
 static const int FRAMERATE = 60;
 static const int W_WIDTH = 1920;
@@ -26,6 +26,7 @@ typedef struct program {
     int id;
     unsigned int height;
     unsigned int width;
+    int fullscreen;
 } program_t;
 
 typedef struct window {
@@ -47,7 +48,7 @@ int create_framebuffer(window_t *w, program_t *prog);
 void destroy_window(window_t *w);
 void destroy_framebuffer(window_t *w);
 
-int event_manager(window_t *w, sfEvent *e, program_t *prog);
+void event_manager(window_t *w, sfEvent *e, program_t *prog);
 int run(int id);
 
 int run01(program_t *prog);
@@ -62,5 +63,6 @@ int run09(program_t *prog);
 int run10(program_t *prog);
 int run11(program_t *prog);
 int run12(program_t *prog);
+int run13(program_t *prog);
 
 #endif
