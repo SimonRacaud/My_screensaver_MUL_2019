@@ -21,6 +21,7 @@ static const char *DESCRIPTION[MAX_ID] =
     "Poetry",
     "Bounce balle",
     "Grush01 : lightning",
+    "Spline",
     "Grush02 : The end"
 };
 

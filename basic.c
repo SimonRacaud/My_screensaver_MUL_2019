@@ -19,6 +19,7 @@ void usage(void)
     my_putstr("USER INTERACTIONS\n\tLEFT_ARROW\tswitch to the previous ");
     my_putstr("animation.\n\tRIGHT_ARROW\tswitch to the next animation.\n");
     my_putstr("\tUP_ARROW\tReload the window.\n");
+    my_putstr("\tDOWN_ARROW\tFull screen mode (enable/disable).\n");
     my_putstr("\tESCAPE\t\tClose the window.\n");
     my_putstr("\033[0m");
 }
