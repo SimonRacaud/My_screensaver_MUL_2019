@@ -7,7 +7,7 @@
 
 #include "w07_animated_sort.h"
 
-void display(window_t *w, qsort_t *qs)
+void display(window_t *w, qsort_t *qs, int idx_begin, int idx_end)
 {
     unsigned int lwidth = (w->fb->width / (qs->size + 2)) - 1;
     sfColor *c;
@@ -18,7 +18,7 @@ void display(window_t *w, qsort_t *qs)
 
     framebuffer_clear(w->fb);
     for (int i = 0; i < qs->size; i++) {
-        if (i == qs->idx_begin || i == qs->idx_end)
+        if (i == idx_begin || i == idx_end)
             c = &red;
         else
             c = &white;
@@ -48,7 +48,6 @@ static void generate_mixed_array(int *array, int size)
 static void init_qsort(qsort_t *qsort, int size, int *array)
 {
     qsort->array = array;
-    qsort->idx_pivot = 0;
     qsort->size = size;
 }
 

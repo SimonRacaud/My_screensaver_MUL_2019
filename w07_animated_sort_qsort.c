@@ -21,9 +21,6 @@ void quick_sort_disp(qsort_t *qs, int idx_begin, int idx_end, window_t *w)
     int cur_left = idx_begin - 1;
     int cur_right = idx_end + 1;
 
-    qs->idx_pivot = idx_begin;
-    qs->idx_begin = idx_begin;
-    qs->idx_end = idx_end;
     if (idx_begin >= idx_end)
         return;
     while (1) {
@@ -36,7 +33,7 @@ void quick_sort_disp(qsort_t *qs, int idx_begin, int idx_end, window_t *w)
         if (cur_left >= cur_right)
             break;
         swap(&qs->array[cur_left], &qs->array[cur_right]);
-        display(w, qs);
+        display(w, qs, idx_begin, idx_end);
     }
     quick_sort_disp(qs, idx_begin, cur_right, w);
     quick_sort_disp(qs, cur_right + 1, idx_end, w);

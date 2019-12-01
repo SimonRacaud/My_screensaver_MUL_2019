@@ -31,8 +31,8 @@ int create_framebuffer(window_t *w, program_t *prog)
     framebuffer_t **fba[4] = {&w->fb, &w->fb2, &w->fb3, &w->fb4};
 
     for (int i = 0; i < w->nb_fb; i++) {
-        *fba[i] = framebuffer_create(prog->width, prog->height);
-        if (*fba[i] == NULL)
+        (*fba)[i] = framebuffer_create(prog->width, prog->height);
+        if ((*fba)[i] == NULL)
             return -1;
     }
     return 0;
