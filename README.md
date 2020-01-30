@@ -2,6 +2,7 @@
 A screensaver written in C with the CSFML library
 
 Usage:
+
 ![Usage](img/usage.png)
 
 ![Description](img/desc.png)
