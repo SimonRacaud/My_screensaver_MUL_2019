@@ -4,6 +4,8 @@ A screensaver written in C with the CSFML library
 Usage:
 ![Usage](img/usage.png)
 
+![Description](img/desc.png)
+
 Screenshot:
 
 ![ScreenSaver01](img/ss01.png)
@@ -21,3 +23,13 @@ Screenshot:
 ![ScreenSaver07](img/ss07.png)
 
 ![ScreenSaver08](img/ss08.png)
+
+![ScreenSaver09](img/ss09.png)
+
+![ScreenSaver10](img/ss10.png)
+
+![ScreenSaver11](img/ss11.png)
+
+![ScreenSaver12](img/ss12.png)
+
+![ScreenSaver13](img/ss13.png)
