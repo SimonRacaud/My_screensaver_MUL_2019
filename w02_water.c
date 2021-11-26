@@ -42,8 +42,8 @@ static void init(water_t *water, framebuffer_t *fb)
 static void water_effect(framebuffer_t *fb, water_t *water)
 {
     unsigned int size = fb->height * fb->width * 4;
-    unsigned int shift1;
-    unsigned int shift2;
+    unsigned int shift1 = 0;
+    unsigned int shift2 = 0;
     sfVector2u coord;
 
     for (unsigned int p = 0; p < size; p += 4) {
